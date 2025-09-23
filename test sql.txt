@@ -1,0 +1,54 @@
+1.  Find the number of students enrolled in each course.
+answer=> select s.course_name, count(e.student_id) from students s inner join
+	enrollments e on s.student_id=e.student_id group by s.studnt_name;
+
+2. Find students who took at least one course with grade = 'A'.
+answer=> select s.student_name from students s inner join enroolments e
+	on s.student_id=e.student_id where e.grade='A';
+
+4.  Find the student(s) who paid the highest course fee.
+answer=> select s.student_name from students s join enrollments e on s.student_id=e.student_id where e.course_fee=
+(select max(course_fee) from enrollments)
+
+5.Find students whose all enrolled courses have fees greater than or equal to
+6000.
+answer=> select s.student_name from students s join enrollments e on 
+	s.student_id=e.student_id group by s.student_name 
+	having min(e.course_fee)>=6000;
+
+answer8=>
+index => a index is mecahnism in the sql that accses the data in the faster way.
+
+type of index
+  clustred index=> 1. its only one in the table table it wil create in the table when we  use the primary key its  sorted the data in table automatically
+
+2. no clusterd iondex=> we can use use multiple non clustred inde in the table its crtaed when we use the unqiue or we ceate mankkya touse create index index name on table name(columnname) and automaticallycreate hen we use unique constrain
+
+3.comoposite index=. in this index we can use mltiple column example
+		create index idx_name on table name(comun1.colun2....)
+
+
+answe 9= cte  a named temproary result set defined ,its use for redabilty 
+	its store in memory in this we have not prefom, ddl dml orpation
+	its perfom using with keyword 
+	subquery=> query within inside a query ,inner query depedent on outr query
+ 		in the corleated subquery ineer query execute for outer for each row
+
+question 6=Find the student(s) who enrolled in the course with the lowest fee.
+answer => select distinct s.studnt_name, e.course_name
+	from students s
+	join enrollments e on s.student_id= e.stident_id where  e.course_fee=
+	(select min(course_fee) from enrollments);
+
+ 7  Show cumulative course fees per student (running total).
+select student_name , sum(course_fee) over(partition by student_id order by
+     enroll_id) from enrollments;
+
+3 For each student, show their course and total number of courses taken using a
+window function.
+answer => select s.student_name,e.course_name, count(e.enroll_id) over(partition by     	s.student_name)
+	from students as s join enrollment as e on s.student_id=e.student_id;
+
+
+
+
